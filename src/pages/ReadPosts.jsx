@@ -40,11 +40,9 @@ const ReadPosts = (props) => {
             .sort((a, b) => a.votes - b.votes)
             .map((post) => (
               <Post
+                props={post}
                 key={post.id}
-                id={post.id}
-                user={post.user}
-                text={post.text}
-                title={post.title}
+                session={props.session}
               />
             ))
         ) : (

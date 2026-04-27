@@ -19,14 +19,16 @@ const HomePage = ({ session }) => {
       <hr className="home__divider" />
       <p className="home__intro">
         Here, you are free to express your opinion — even if it concerns an
-        acclaimed writer from a century ago.
+        acclaimed writer from two thousand years ago. You hate it? Express it. You love it? Then, why? <br/>
+        Every opinion is validated with argumentation.
       </p>
-      <p className="home__intro">
-        You hate it? Express it. You love it? Then, why?
-      </p>
+      <br/>
+      <br/>
       <p className="home__intro home__intro--accent">
-        Of course, every opinion is validated with argumentation. Be yourself.
+        "But many mortals are devoted to their bellies and to sleep; without learning <br/>
+        and without culture, they pass through life like tourists."
       </p>
+      <p className="home__intro">Sallust</p>
     </section>
   )
 }

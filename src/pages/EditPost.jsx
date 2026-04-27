@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../client'
 
-const EditPost = () => {
+const EditPost = ({session}) => {
+  const username = session?.user.user_metadata?.username
+  if(!session) window.location = '/'
+  
   const [post, setPost] = useState({ text: "", title: "" })
   const { id } = useParams()
 
@@ -11,7 +14,7 @@ const EditPost = () => {
     event.preventDefault()
     await supabase
       .from('Posts')
-      .update({ user: post.user, text: post.text, title: post.title, category: post.category, votes: post.votes })
+      .update({ user: post.user, text: post.text, title: post.title, category: post.category })
       .eq('id', id)
 
     window.location = `/${post.category}`
@@ -33,6 +36,11 @@ const EditPost = () => {
       window.alert("There has been an error: " + error)
     }
     setPost(data)
+
+    if(username != data.user) {
+      console.log(username)
+      console.log(data.user)
+    }
   }
 
   useEffect(() => { initializePost() }, [id])

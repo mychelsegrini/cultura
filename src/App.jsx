@@ -6,6 +6,7 @@ import CreatePost from './pages/CreatePost'
 import EditPost from './pages/EditPost'
 import HomePage from './pages/HomePage'
 import Auth from './pages/Auth'
+import Details from './pages/Details'
 
 import { supabase } from './client'
 import { useEffect, useState } from 'react'
@@ -39,19 +40,23 @@ function App() {
   let element = useRoutes([
     {
       path: "/:category",
-      element: <ReadPosts data={posts} />
+      element: <ReadPosts data={posts} session ={session}/>
     },
     {
       path: "/edit/:id",
-      element: <EditPost data={posts} />
+      element: <EditPost data={posts} session={session} />
     },
     {
       path: "/new/:category",
-      element: <CreatePost />
+      element: <CreatePost session={session}/>
     },
     {
       path: "/",
       element: <HomePage session={session} />
+    }
+     {
+      path: "/details/:id",
+      element: <Details session={session} />
     }
   ]);
 

@@ -3,9 +3,12 @@ import { supabase } from '../client'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-const CreatePost = () => {
-  const { category, user } = useParams()
-  const [post, setPost] = useState({ user: user, text: "", title: "", category: category, votes: 0 })
+const CreatePost = ({session}) => {
+  const { category } = useParams()
+  if(!session) window.location = `/${category}`
+  const username = session.user.user_metadata?.username
+
+  const [post, setPost] = useState({ user: username, text: "", title: "", category: category, votes: 0, voted_up:[], voted_down: [] })
 
   const createPost = async (event) => {
     event.preventDefault()
@@ -15,7 +18,7 @@ const CreatePost = () => {
     }
     await supabase
       .from('Posts')
-      .insert({ user: post.user, text: post.text, title: post.title, category: post.category, votes: post.votes })
+      .insert(post)
       .select()
 
     window.location = `/${category}`;
