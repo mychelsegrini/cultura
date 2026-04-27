@@ -1,0 +1,256 @@
+/* ================================================================
+   Cultura · Details (single post + comments)
+   ================================================================ */
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.details--missing {
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.details__loading {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-muted);
+  padding: var(--space-7);
+}
+
+/* ----------------------------------------------------------------
+   Breadcrumbs
+---------------------------------------------------------------- */
+.details__breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.details__breadcrumbs a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.details__breadcrumbs a:hover {
+  color: var(--color-accent);
+}
+
+.details__breadcrumbs-current {
+  color: var(--color-primary);
+}
+
+/* ----------------------------------------------------------------
+   The post itself
+---------------------------------------------------------------- */
+.details__post {
+  position: relative;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.details__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.details__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.details__author {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.details__author::before {
+  content: '— ';
+  color: var(--color-accent);
+}
+
+.details__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.details__edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.details__edit:hover {
+  color: var(--color-accent);
+  background-color: rgba(212, 163, 115, 0.1);
+}
+
+.details__figure {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-warm);
+}
+
+.details__figure img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+.details__body {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.details__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.details__count {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Larger vote control on the details page */
+.vote-control--lg {
+  padding: 6px 12px;
+  gap: var(--space-2);
+}
+
+.vote-control--lg .vote-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.vote-control--lg .vote-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.vote-control--lg .vote-count {
+  font-size: 1.1rem;
+  min-width: 28px;
+}
+
+/* ----------------------------------------------------------------
+   Comments wrapper (the form lives here; cards are .Comment)
+---------------------------------------------------------------- */
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.comments__title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--color-primary);
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.comments__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.comments__form textarea {
+  min-height: 110px;
+}
+
+.comments__signin {
+  background-color: var(--color-surface-warm);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-style: italic;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.comments__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.comments__empty {
+  text-align: center;
+  padding: var(--space-6);
+  background-color: var(--color-surface-warm);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--color-text-muted);
+}

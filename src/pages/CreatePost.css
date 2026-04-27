@@ -35,3 +35,65 @@
   flex-direction: column;
   gap: var(--space-2);
 }
+
+/* ----------------------------------------------------------------
+   Image upload
+---------------------------------------------------------------- */
+.post-form__file-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  background-color: var(--color-surface-warm);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-text);
+}
+
+.post-form__file-drop:hover {
+  border-color: var(--color-accent);
+  background-color: rgba(212, 163, 115, 0.08);
+}
+
+.post-form__file-drop-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.post-form__file-drop-hint {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.post-form__image-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.post-form__image-preview img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.post-form__image-remove {
+  align-self: flex-start;
+}

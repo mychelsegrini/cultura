@@ -13,7 +13,7 @@ const ReadPosts = (props) => {
       .from('Posts')
       .select()
       .eq('category', category)
-      .order('votes', { ascending: true })
+      .order('votes', { ascending: false })
 
     setPosts(data)
   }
@@ -37,7 +37,7 @@ const ReadPosts = (props) => {
       <div className="feed__list">
         {posts && posts.length > 0 ? (
           [...posts]
-            .sort((a, b) => a.votes - b.votes)
+            .sort((a, b) => b.votes - a.votes)
             .map((post) => (
               <Post
                 props={post}

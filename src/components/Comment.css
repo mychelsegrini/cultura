@@ -1,0 +1,135 @@
+/* ================================================================
+   Cultura · Comment (recursive thread)
+   ================================================================ */
+
+.Comment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.Comment__body {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--transition);
+}
+
+.Comment__body:hover {
+  border-color: var(--color-border-strong);
+}
+
+.Comment--nested .Comment__body {
+  background-color: var(--color-surface-warm);
+  border-left: 3px solid var(--color-secondary);
+}
+
+.Comment__header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.Comment__author {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.Comment__author::before {
+  content: '— ';
+  color: var(--color-accent);
+}
+
+.Comment__time {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.Comment__content {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.Comment__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.Comment__reply-btn {
+  all: unset;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.Comment__reply-btn:hover {
+  color: var(--color-accent);
+  background-color: rgba(212, 163, 115, 0.1);
+}
+
+.Comment__reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border);
+}
+
+.Comment__reply-form textarea {
+  min-height: 90px;
+}
+
+.Comment__children {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+}
+
+/* Smaller vote control inside comments */
+.vote-control--sm {
+  padding: 2px 6px;
+}
+
+.vote-control--sm .vote-btn {
+  width: 24px;
+  height: 24px;
+}
+
+.vote-control--sm .vote-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.vote-control--sm .vote-count {
+  font-size: 0.9rem;
+  min-width: 18px;
+}

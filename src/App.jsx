@@ -53,8 +53,8 @@ function App() {
     {
       path: "/",
       element: <HomePage session={session} />
-    }
-     {
+    },
+    {
       path: "/details/:id",
       element: <Details session={session} />
     }
