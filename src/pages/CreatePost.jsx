@@ -23,6 +23,7 @@ const CreatePost = ({ session }) => {
     voted_down: [],
   })
 
+  const [imageUrlInput, setImageUrlInput] = useState('')
   const [imageFile, setImageFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
   const [submitting, setSubmitting] = useState(false)
@@ -31,6 +32,15 @@ const CreatePost = ({ session }) => {
   const handleChange = (event) => {
     const { name, value } = event.target
     setPost((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleUrlChange = (event) => {
+    const value = event.target.value
+    setImageUrlInput(value)
+    if (value && imageFile) {
+      setImageFile(null)
+      setPreviewUrl(null)
+    }
   }
 
   const handleFile = (event) => {
@@ -43,6 +53,7 @@ const CreatePost = ({ session }) => {
     setError('')
     setImageFile(file)
     setPreviewUrl(URL.createObjectURL(file))
+    if (imageUrlInput) setImageUrlInput('')
   }
 
   const removeImage = () => {
@@ -72,6 +83,19 @@ const CreatePost = ({ session }) => {
     return data.publicUrl
   }
 
+  const resolveImageUrl = async () => {
+    const trimmed = imageUrlInput.trim()
+    if (trimmed) {
+      try {
+        new URL(trimmed)
+      } catch {
+        throw new Error('That image URL does not look valid.')
+      }
+      return trimmed
+    }
+    return uploadImageIfPresent()
+  }
+
   const createPost = async (event) => {
     event.preventDefault()
     if (!post.title?.trim() || !post.text?.trim()) {
@@ -82,7 +106,7 @@ const CreatePost = ({ session }) => {
     setSubmitting(true)
     setError('')
     try {
-      const imageUrl = await uploadImageIfPresent()
+      const imageUrl = await resolveImageUrl()
       const { error: insertError } = await supabase
         .from('Posts')
         .insert({ ...post, image_url: imageUrl })
@@ -97,6 +121,8 @@ const CreatePost = ({ session }) => {
       setSubmitting(false)
     }
   }
+
+  const livePreview = previewUrl || imageUrlInput.trim() || null
 
   return (
     <section className="post-form">
@@ -132,7 +158,21 @@ const CreatePost = ({ session }) => {
         </div>
 
         <div className="post-form__field">
-          <label htmlFor="image">An image to set the mood (optional)</label>
+          <label htmlFor="image_url">An image to set the mood (optional)</label>
+
+          <input
+            type="url"
+            id="image_url"
+            name="image_url"
+            placeholder="Paste an image URL — a book cover, a film still…"
+            value={imageUrlInput}
+            onChange={handleUrlChange}
+            disabled={!!imageFile}
+          />
+
+          <div className="post-form__or">
+            <span>or upload a file</span>
+          </div>
 
           {previewUrl ? (
             <div className="post-form__image-preview">
@@ -146,12 +186,20 @@ const CreatePost = ({ session }) => {
               </button>
             </div>
           ) : (
-            <label className="post-form__file-drop" htmlFor="image">
+            <label
+              className={
+                'post-form__file-drop' +
+                (imageUrlInput.trim() ? ' post-form__file-drop--disabled' : '')
+              }
+              htmlFor="image"
+            >
               <span className="post-form__file-drop-title">
                 Click to upload an image
               </span>
               <span className="post-form__file-drop-hint">
-                A book cover, a film still, an album sleeve…
+                {imageUrlInput.trim()
+                  ? 'A URL is set above — clear it to upload a file instead.'
+                  : 'A book cover, a film still, an album sleeve…'}
               </span>
               <input
                 type="file"
@@ -160,8 +208,21 @@ const CreatePost = ({ session }) => {
                 accept="image/*"
                 onChange={handleFile}
                 hidden
+                disabled={!!imageUrlInput.trim()}
               />
             </label>
+          )}
+
+          {!previewUrl && imageUrlInput.trim() && (
+            <div className="post-form__image-preview post-form__image-preview--url">
+              <img
+                src={imageUrlInput.trim()}
+                alt="Image preview"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            </div>
           )}
         </div>
 

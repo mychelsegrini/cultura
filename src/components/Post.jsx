@@ -4,6 +4,22 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../client'
 import { useState } from 'react'
 
+const formatPostDate = (iso) => {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  const datePart = d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+  const timePart = d.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+  return `${datePart} at ${timePart}`
+}
+
 const Post = ({ props, session }) => {
   const username = session?.user?.user_metadata?.username
   const [post, setPost] = useState(props)
@@ -111,7 +127,14 @@ const Post = ({ props, session }) => {
       )}
 
       <Link to={`/details/${props.id}`} className="Post__link">
-        <p className="user">{props.user}</p>
+        <p className="user">
+          <span>{props.user}</span>
+          {props.created_at && (
+            <time className="Post__time" dateTime={props.created_at}>
+              {formatPostDate(props.created_at)}
+            </time>
+          )}
+        </p>
         <h3 className="title">{props.title}</h3>
 
         {props.image_url && (

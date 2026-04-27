@@ -94,6 +94,41 @@
   border: 1px solid var(--color-border);
 }
 
+.post-form__image-preview--url img {
+  max-height: 280px;
+}
+
 .post-form__image-remove {
   align-self: flex-start;
+}
+
+.post-form__file-drop--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.post-form__file-drop--disabled:hover {
+  border-color: var(--color-border-strong);
+  background-color: var(--color-surface-warm);
+}
+
+.post-form__or {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: var(--space-2) 0;
+}
+
+.post-form__or::before,
+.post-form__or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
 }

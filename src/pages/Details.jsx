@@ -6,14 +6,18 @@ import Comment from '../components/Comment'
 
 const formatDate = (iso) => {
   if (!iso) return ''
-  try {
-    return new Date(iso).toLocaleString(undefined, {
-      dateStyle: 'long',
-      timeStyle: 'short',
-    })
-  } catch {
-    return ''
-  }
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  const datePart = d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+  const timePart = d.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+  return `${datePart} at ${timePart}`
 }
 
 export default function Details({ session }) {
@@ -227,7 +231,10 @@ export default function Details({ session }) {
             {post.created_at && (
               <>
                 <span aria-hidden="true">·</span>
-                <time dateTime={post.created_at}>
+                <time
+                  className="details__time"
+                  dateTime={post.created_at}
+                >
                   {formatDate(post.created_at)}
                 </time>
               </>

@@ -96,6 +96,14 @@
   color: var(--color-accent);
 }
 
+.details__time {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
 .details__title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3rem);

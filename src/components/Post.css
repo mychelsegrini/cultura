@@ -40,6 +40,10 @@
 }
 
 .Post .user {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
@@ -49,9 +53,20 @@
   margin: 0;
 }
 
-.Post .user::before {
+.Post .user > span:first-child::before {
   content: '— ';
   color: var(--color-accent);
+}
+
+.Post__time {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--color-text-muted);
+  opacity: 0.78;
+  font-style: italic;
 }
 
 .Post .title {
