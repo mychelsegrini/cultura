@@ -1,15 +1,10 @@
-# Web Development Final Project - *Cultura*
+# *Cultura*
 
-Submitted by: **Mychel Segrini**
+**Mychel Segrini**
 
-This web app: **Cultura is a social media for people rejecting the brainrot culture.**
+**Cultura is a social media for people rejecting the brainrot culture.**
 
-Time spent: **5** hours spent in total
-
-## Required Features
-
-The following **required** functionality is completed:
-
+## Features
 
 - [X] **Web app includes a create form that allows the user to create posts**
   - Form requires users to add a post title
