@@ -37,18 +37,13 @@
   - After a user creates a new post, they can go back and edit the post
   - A previously created post can be deleted from its post page
 
-The following **optional** features are implemented:
-
-
 - [X] Web app implements pseudo-authentication
   - Users can only edit and delete posts or delete comments by entering the secret key, which is set by the user during post creation
   - **or** upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them
   - For both options, only the original user author of a post can update or delete it
 
-The following **additional** features are implemented:
-
-* [X] There is an actual authentication with email verification.
-* [X] Users can upload images from their local computers.
+- [X] There is an actual authentication with email verification.
+- [X] Users can upload images from their local computers.
 
 ## Video Walkthrough
 
